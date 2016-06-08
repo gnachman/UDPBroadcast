@@ -7,10 +7,10 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 
-static void DatagramReceived(char *message,
-                             int length,
-                             struct sockaddr_storage *remoteAddress,
-                             socklen_t remoteAddressSize) {
+static int DatagramReceived(char *message,
+                            int length,
+                            struct sockaddr_storage *remoteAddress,
+                            socklen_t remoteAddressSize) {
   char formattedHostName[NI_MAXHOST];
   char formattedPortNumber[NI_MAXSERV];
 
@@ -30,6 +30,8 @@ static void DatagramReceived(char *message,
 
   printf("Content: %.*s\n", length, message);
   printf("\n");
+
+  return 1;
 }
 
 int main(int argc, char *argv[]) {

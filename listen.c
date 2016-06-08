@@ -58,7 +58,9 @@ int Listen(unsigned short port, ListenCallback *callback) {
       fprintf(stderr, "recvfrom() failed: %s", strerror(errno));
       return 1;
     } else {
-      callback(buffer, status, &remoteSocketAddress, socketAddressSize);
+      if (callback(buffer, status, &remoteSocketAddress, socketAddressSize)) {
+        break;
+      }
     }
   }
 
