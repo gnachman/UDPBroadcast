@@ -92,6 +92,7 @@ static void LogRequest(char *hostname, DiscoveryServerStatus status) {
   strsep(&temp, "\r\n");
 
   printf("%s: %s (%s)\n", formattedTime, hostname, FormattedStatus(status));
+  fflush(stdout);
 }
 
 static DiscoveryServerStatus HandleRequest(char *message,
