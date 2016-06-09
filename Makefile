@@ -3,8 +3,8 @@ all: discovery_client discovery_server
 discovery_server: discovery_server.c socket.c socket.h
 	cc discovery_server.c socket.c -g -O0 -o discovery_server
 
-discovery_client: discovery_client.c socket.c socket.h
-	cc discovery_client.c socket.c -g -O0 -o discovery_client
+discovery_client: discovery_client.c socket.c socket.h libdiscovery.c libdiscovery.h
+	cc libdiscovery.c discovery_client.c socket.c -g -O0 -o discovery_client
 
 test_server: test_server.c socket.c socket.h
 	cc test_server.c socket.c -g -O0 -o test_server
