@@ -50,7 +50,7 @@ int Broadcast(char *message, size_t length) {
                   (struct sockaddr *)&broadcastAddr,
                   sizeof(broadcastAddr));
   if (status != sendStringLen){
-    fprintf(stderr, "sendto() failed: %s", strerror(errno));
+    fprintf(stderr, "sendto() failed in main.c: %s\n", strerror(errno));
     return 1;
   }
 

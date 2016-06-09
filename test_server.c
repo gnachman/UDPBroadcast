@@ -1,4 +1,4 @@
-#include "listen.h"
+#include "socket.h"
 
 #include <errno.h>
 #include <netdb.h>
@@ -35,5 +35,5 @@ static int DatagramReceived(char *message,
 }
 
 int main(int argc, char *argv[]) {
-  return Listen(1912, DatagramReceived);
+  return RunListenServer(1912, DatagramReceived);
 }
