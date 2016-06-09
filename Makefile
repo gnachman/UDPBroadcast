@@ -1,18 +1,17 @@
 all: discovery_client discovery_server
 
-discovery_server: discovery_server.c socket.c socket.h
-	cc discovery_server.c socket.c -g -O0 -o discovery_server
+libdiscovery: socket.c socket.h libdiscovery.c libdiscovery.h log.h
+	cc -c socket.c -o socket.o
+	cc -c libdiscovery.c -o libdiscovery.o
+	ar rcs libdiscovery.a socket.o libdiscovery.o
 
-discovery_client: discovery_client.c socket.c socket.h libdiscovery.c libdiscovery.h
-	cc libdiscovery.c discovery_client.c socket.c -g -O0 -o discovery_client
+discovery_server: discovery_server.c libdiscovery log.h
+	cc discovery_server.c libdiscovery.a -g -O0 -o discovery_server
 
-test_server: test_server.c socket.c socket.h
-	cc test_server.c socket.c -g -O0 -o test_server
-
-test_client: test_client.c socket.c socket.h
-	cc test_client.c socket.c -g -O0 -o test_client
+discovery_client: discovery_client.c libdiscovery log.h
+	cc discovery_client.c libdiscovery.a -g -O0 -o discovery_client
 
 clean: force
-	rm -rf *.dSYM test_client test_server discovery_client discovery_server
+	rm -rf *.dSYM discovery_client discovery_server *.o *.a
 
 force:
